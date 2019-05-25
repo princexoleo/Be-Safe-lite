@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login_str"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/login_textSize"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="18dp" />
