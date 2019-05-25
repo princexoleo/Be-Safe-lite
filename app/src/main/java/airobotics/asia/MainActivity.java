@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick: sign-up button");
                // Toast.makeText(MainActivity.this, "Sign Up Button Pressed!", Toast.LENGTH_SHORT).show();
                 //we are going to next activity so we need a intent
-                
+                Intent goNextIntent = new Intent(MainActivity.this, SignUpAcrivity.class);
+                startActivity(goNextIntent);
+
 
             }
         });
