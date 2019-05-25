@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         signinButton = findViewById(R.id.signin);
         signupButton = findViewById(R.id.signup);
+        checkBox = findViewById(R.id.checkbox);
 
         //
     }
