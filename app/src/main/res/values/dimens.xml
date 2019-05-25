@@ -2,4 +2,5 @@
 <resources>
 
     <dimen name="login_textSize">20sp</dimen>
+    <dimen name="app_title_size_lg">24sp</dimen>
 </resources>

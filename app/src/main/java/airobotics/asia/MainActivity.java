@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
-        signinButton = findViewById(R.id.signin);
-        signupButton = findViewById(R.id.signup);
+        signinButton = findViewById(R.id.signin_btn);
+        signupButton = findViewById(R.id.signup_btn);
         checkBox = findViewById(R.id.checkbox);
 
         //
