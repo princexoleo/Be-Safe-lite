@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 //if sign in button pressed ..
                 Log.d(TAG, "onClick: sign-in button");
                 Toast.makeText(MainActivity.this, "Sign in Button Pressed!", Toast.LENGTH_SHORT).show();
+                Intent goNextIntent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(goNextIntent);
             }
         });
 
