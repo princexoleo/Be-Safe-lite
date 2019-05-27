@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
                 //if sign in button pressed ..
                 Log.d(TAG, "onClick: sign-in button");
                 //we are going to next activity so we need a intent
-                Intent goNextIntent = new Intent(SignUpActivity.this, MainActivity.class);
+                Intent goNextIntent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(goNextIntent);
                 finish();
 
