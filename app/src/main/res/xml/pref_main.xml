@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="General">
+
+   <PreferenceCategory
+       android:title="Edit Profile">
+
+       <EditTextPreference
+           android:defaultValue="@bool/default_msg"
+           android:dialogIcon="@drawable/ic_mail_outline_black_24dp"
+           android:icon="@drawable/ic_message_black_24dp"
+           android:inputType="textMultiLine"
+           android:key="edit_text_preference_2"
+           android:selectAllOnFocus="true"
+           android:singleLine="true"
+           android:title="Change profile Name" />
+
+       <EditTextPreference
+           android:defaultValue="Default value"
+           android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
+           android:icon="@drawable/ic_phonelink_ring_black_24dp"
+           android:inputType="phone"
+           android:key="edit_text_preference_1"
+           android:selectAllOnFocus="true"
+           android:singleLine="true"
+           android:title="Change Phone Number" />
+
+
+       <EditTextPreference
+           android:defaultValue="Default value"
+           android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
+           android:icon="@drawable/ic_phonelink_ring_black_24dp"
+           android:inputType="phone"
+           android:key="edit_text_preference_1"
+           android:selectAllOnFocus="true"
+           android:singleLine="true"
+           android:title="Change Emergency Phone Number" />
+
+       <EditTextPreference
+           android:defaultValue="@bool/default_msg"
+           android:dialogIcon="@drawable/ic_mail_outline_black_24dp"
+           android:icon="@drawable/ic_message_black_24dp"
+           android:inputType="textMultiLine"
+           android:key="edit_text_preference_2"
+           android:selectAllOnFocus="true"
+           android:singleLine="true"
+           android:summary="@string/emergency_settings_hint"
+           android:title="Custom Emergency Message" />
+
+
+   </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="Apps Settings">
+
+
+        <SwitchPreference
+            android:id="@+id/location_service_id"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_gps_fixed_black_24dp"
+            android:key="switch_preference_1"
+            android:title="Location Services "
+            tools:text="if enable it will help you to detect your current location" />
+
+        <SwitchPreference
+            android:id="@+id/bluethoot_service_id"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_bluetooth_connected_black_24dp"
+            android:key="switch_preference_2"
+            android:title="Bluetooth connection "
+            tools:text="if enable it will it help you to connect your device" />
+
+
+    </PreferenceCategory>
+
+    <Preference
+        app:key="feedback"
+        app:title="Send feedback"
+        app:summary="Report technical issues or suggest new features"/>
+
+
+</PreferenceScreen>

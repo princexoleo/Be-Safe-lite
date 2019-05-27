@@ -10,4 +10,6 @@
     <string name="latitude_value_str">90.452</string>
     <string name="longitude_value_str">89.526</string>
     <string name="online_status_title_str">Online Status</string>
+    <string name="emergency_settings_hint">it is your emergency contacts number. In emergency time it will send message automatically</string>
+    <bool name="default_msg">Hey ! I'm in danger</bool>
 </resources>
