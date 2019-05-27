@@ -19,7 +19,7 @@
             android:key="user_name_edit_text"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Change profile Name" />
+            android:title="Change profile name"/>
 
         <EditTextPreference
             android:defaultValue="false"
@@ -42,7 +42,7 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="Click here and enter your new valid phone number"
-            android:title="Change Emergency Phone Number" />
+            android:title="Change emergency phone number" />
 
         <EditTextPreference
             android:defaultValue="@string/user_emergency_message"
@@ -52,7 +52,7 @@
             android:key="user_emergency_msg_edit_text"
             android:selectAllOnFocus="true"
             android:summary="@string/emergency_settings_hint"
-            android:title="Custom Emergency Message" />
+            android:title="Custom emergency message" />
 
 
     </PreferenceCategory>
@@ -67,6 +67,7 @@
             android:icon="@drawable/ic_gps_fixed_black_24dp"
             android:key="location_switch"
             android:title="Location Services "
+            android:summary="Turn this option on or off"
             tools:text="if enable it will help you to detect your current location" />
 
         <SwitchPreference
@@ -75,6 +76,7 @@
             android:icon="@drawable/ic_bluetooth_connected_black_24dp"
             android:key="bluetooth_switch"
             android:title="Bluetooth connection "
+            android:summary="Turn this option on or off"
             tools:text="if enable it will it help you to connect your device" />
 
 
