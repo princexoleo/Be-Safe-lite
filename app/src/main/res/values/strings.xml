@@ -11,5 +11,15 @@
     <string name="longitude_value_str">89.526</string>
     <string name="online_status_title_str">Online Status</string>
     <string name="emergency_settings_hint">it is your emergency contacts number. In emergency time it will send message automatically</string>
-    <bool name="default_msg">Hey ! I'm in danger</bool>
+    <string name="default_msg">Hey Im in danger</string>
+
+
+    <!-- User Info Section -->
+    <string name="user_name">User Name</string>
+    <string name="user_phone_number">019********21</string>
+    <string name="user_emergency_phone_number">018115****21</string>
+    <string name="user_emergency_message">Hey im in danger and my location is: </string>
+    <string name="post_emergency_messager_social_media">Post emergency message at social media</string>
+    <string name="change_phone_number_title">Change Phone Number</string>
+
 </resources>

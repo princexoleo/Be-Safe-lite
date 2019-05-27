@@ -1,67 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:title="General">
-
-   <PreferenceCategory
-       android:title="Edit Profile">
-
-       <EditTextPreference
-           android:defaultValue="@bool/default_msg"
-           android:dialogIcon="@drawable/ic_mail_outline_black_24dp"
-           android:icon="@drawable/ic_message_black_24dp"
-           android:inputType="textMultiLine"
-           android:key="edit_text_preference_2"
-           android:selectAllOnFocus="true"
-           android:singleLine="true"
-           android:title="Change profile Name" />
-
-       <EditTextPreference
-           android:defaultValue="Default value"
-           android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
-           android:icon="@drawable/ic_phonelink_ring_black_24dp"
-           android:inputType="phone"
-           android:key="edit_text_preference_1"
-           android:selectAllOnFocus="true"
-           android:singleLine="true"
-           android:title="Change Phone Number" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:isScrollContainer="true"
+    android:nestedScrollingEnabled="true"
+    android:overScrollMode="ifContentScrolls"
+    android:title="General"
+    >
 
 
-       <EditTextPreference
-           android:defaultValue="Default value"
-           android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
-           android:icon="@drawable/ic_phonelink_ring_black_24dp"
-           android:inputType="phone"
-           android:key="edit_text_preference_1"
-           android:selectAllOnFocus="true"
-           android:singleLine="true"
-           android:title="Change Emergency Phone Number" />
+    <PreferenceCategory android:title="Edit Profile">
 
-       <EditTextPreference
-           android:defaultValue="@bool/default_msg"
-           android:dialogIcon="@drawable/ic_mail_outline_black_24dp"
-           android:icon="@drawable/ic_message_black_24dp"
-           android:inputType="textMultiLine"
-           android:key="edit_text_preference_2"
-           android:selectAllOnFocus="true"
-           android:singleLine="true"
-           android:summary="@string/emergency_settings_hint"
-           android:title="Custom Emergency Message" />
+        <EditTextPreference
+            android:defaultValue="@string/user_name"
+            android:dialogIcon="@drawable/ic_perm_identity_black_24dp"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:inputType="textMultiLine"
+            android:key="user_name_edit_text"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Change profile Name" />
+
+        <EditTextPreference
+            android:defaultValue="false"
+            android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
+            android:icon="@drawable/ic_phonelink_ring_black_24dp"
+            android:inputType="phone"
+            android:key="user_phone_number_edit_text"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Click here and enter your new valid phone number"
+            android:title="@string/change_phone_number_title" />
 
 
-   </PreferenceCategory>
+        <EditTextPreference
+            android:defaultValue="false"
+            android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
+            android:icon="@drawable/ic_phonelink_ring_black_24dp"
+            android:inputType="phone"
+            android:key="user_emergency_edit_text"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Click here and enter your new valid phone number"
+            android:title="Change Emergency Phone Number" />
+
+        <EditTextPreference
+            android:defaultValue="@string/user_emergency_message"
+            android:dialogIcon="@drawable/ic_mail_outline_black_24dp"
+            android:icon="@drawable/ic_message_black_24dp"
+            android:inputType="textMultiLine"
+            android:key="user_emergency_msg_edit_text"
+            android:selectAllOnFocus="true"
+            android:summary="@string/emergency_settings_hint"
+            android:title="Custom Emergency Message" />
 
 
-    <PreferenceCategory
-        android:title="Apps Settings">
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="Apps Settings">
 
 
         <SwitchPreference
             android:id="@+id/location_service_id"
             android:defaultValue="true"
             android:icon="@drawable/ic_gps_fixed_black_24dp"
-            android:key="switch_preference_1"
+            android:key="location_switch"
             android:title="Location Services "
             tools:text="if enable it will help you to detect your current location" />
 
@@ -69,17 +73,30 @@
             android:id="@+id/bluethoot_service_id"
             android:defaultValue="true"
             android:icon="@drawable/ic_bluetooth_connected_black_24dp"
-            android:key="switch_preference_2"
+            android:key="bluetooth_switch"
             android:title="Bluetooth connection "
             tools:text="if enable it will it help you to connect your device" />
 
 
     </PreferenceCategory>
 
-    <Preference
-        app:key="feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
+
+    <PreferenceCategory android:title="Developers Settings">
+
+        <Preference
+            android:icon="@drawable/ic_feedback_black_24dp"
+            app:key="feedback"
+            app:summary="Report technical issues or suggest new features"
+            app:title="Send feedback" />
+
+        <Preference
+            android:icon="@drawable/ic_developer_mode_black_24dp"
+            android:key="About"
+            android:summary="This application developed by AiRobotics asia"
+            android:title="About us" />
+    </PreferenceCategory>
+
+
 
 
 </PreferenceScreen>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
+import airobotics.asia.fragment.PrefsFragment;
 import airobotics.asia.fragment.ProfileFragment;
 import airobotics.asia.fragment.SettingsFragment;
 import airobotics.asia.ui.adapter.TabAdapter;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new TabAdapter(getSupportFragmentManager());
         adapter.addFragment(new ProfileFragment(),"Profile");
-        adapter.addFragment(new SettingsFragment(),"Settings");
+        adapter.addFragment(new PrefsFragment(),"Settings");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
