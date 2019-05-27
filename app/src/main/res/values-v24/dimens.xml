@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="login_textSize">18sp</dimen>
+    <dimen name="app_title_size_lg">18sp</dimen>
+    <dimen name="normal_margin_top">4dp</dimen>
+    <dimen name="tablayout_margin_top">8dp</dimen>
+    <dimen name="text_input_size_normal">14sp</dimen>
+</resources>
