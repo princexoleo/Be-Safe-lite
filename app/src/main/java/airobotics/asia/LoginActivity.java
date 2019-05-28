@@ -52,28 +52,26 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //
-        signinButton.setOnClickListener(new View.OnClickListener() {
+        signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //if sign in button pressed ..
                 Log.d(TAG, "onClick: sign-in button");
-                Toast.makeText(LoginActivity.this, "Sign in Button Pressed!", Toast.LENGTH_SHORT).show();
-                Intent goNextIntent = new Intent(LoginActivity.this, MainActivity.class);
+                // Toast.makeText(LoginActivity.this, "Sign Up Button Pressed!", Toast.LENGTH_SHORT).show();
+                //we are going to next activity so we need a intent
+                Intent goNextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(goNextIntent);
 
             }
         });
 
         //
-        signupButton.setOnClickListener(new View.OnClickListener() {
+        signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //sign up button pressed
                 Log.d(TAG, "onClick: sign-up button");
-               // Toast.makeText(LoginActivity.this, "Sign Up Button Pressed!", Toast.LENGTH_SHORT).show();
-                //we are going to next activity so we need a intent
-                Intent goNextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(goNextIntent);
+
 
                 //collect user given email and password String from EditText
                 String given_email = emailEditText.getText().toString();
