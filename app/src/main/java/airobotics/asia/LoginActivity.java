@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -74,35 +75,36 @@ public class LoginActivity extends AppCompatActivity {
 
                 //collect user given email and password String from EditText
                 String given_email = emailEditText.getText().toString();
-                String given_password = emailEditText.getText().toString();
+                String given_password = passwordEditText.getText().toString();
 
-                mAuth.signInWithEmailAndPassword(given_email, given_password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.i(TAG, "loginInfo: email: "+given_email+" password: "+given_password);
 
-                                if (task.isSuccessful()){
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail: success");
-                                    // updateUi
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
+                if (!TextUtils.isEmpty(given_email) && !TextUtils.isEmpty(given_password)){
 
-                                }else{
-                                    Log.d(TAG, "signInWithEmail: failed! ");
-                                    Toast.makeText(LoginActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
+                    mAuth.signInWithEmailAndPassword(given_email, given_password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail: success");
+                                        // updateUi
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        updateUI(user);
+
+                                    } else {
+                                        Log.d(TAG, "signInWithEmail: failed! ");
+                                        Toast.makeText(LoginActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
+                                        updateUI(null);
+                                    }
+
                                 }
+                            });
 
-                            }
-                        });
-
-
-
-
-
-
-
+                }else{
+                    Toast.makeText(LoginActivity.this, "Empty fields not allowed", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
