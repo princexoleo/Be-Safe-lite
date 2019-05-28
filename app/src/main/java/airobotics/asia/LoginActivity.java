@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //if sign in button pressed ..
-                Log.d(TAG, "onClick: sign-in button");
+                Log.d(TAG, "onClick: sign-up button");
                 // Toast.makeText(LoginActivity.this, "Sign Up Button Pressed!", Toast.LENGTH_SHORT).show();
                 //we are going to next activity so we need a intent
                 Intent goNextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
@@ -70,8 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //sign up button pressed
-                Log.d(TAG, "onClick: sign-up button");
-
+                Log.d(TAG, "onClick: sign-in button");
 
                 //collect user given email and password String from EditText
                 String given_email = emailEditText.getText().toString();
