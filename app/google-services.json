@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "168917074916",
+    "firebase_url": "https://be-safe-lite.firebaseio.com",
+    "project_id": "be-safe-lite",
+    "storage_bucket": "be-safe-lite.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168917074916:android:db064ef5d2c03969",
+        "android_client_info": {
+          "package_name": "airobotics.asia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168917074916-r3p4bmbgnp4eae325ehjb409v122m6kt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "airobotics.asia",
+            "certificate_hash": "4c1fb1b5f87d9516e6e6baa1907537aca02891cc"
+          }
+        },
+        {
+          "client_id": "168917074916-jcqakooqq6do8l93nosddp0ugphnlgnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCePlO_m0ajzYOAPYwcc1NTHons7_4tuTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168917074916-jcqakooqq6do8l93nosddp0ugphnlgnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
@@ -22,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox checkBox;
     ImageButton signinButton;
     Button signupButton;
+
+    //Firebase instance
+    private FirebaseAuth mAuth;
     //
 
 
@@ -37,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         signinButton = findViewById(R.id.signin_btn);
         signupButton = findViewById(R.id.signup_btn);
         checkBox = findViewById(R.id.checkbox);
+        
+        //initialize firebaseAuth
+        mAuth = FirebaseAuth.getInstance();
 
         //
         signinButton.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Sign in Button Pressed!", Toast.LENGTH_SHORT).show();
                 Intent goNextIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(goNextIntent);
+                
             }
         });
 
@@ -64,5 +74,24 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+
+        if (currentUser!=null){
+            //user already sign in so we pass intent to mainActivity
+            Intent goMainIntent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(goMainIntent);
+            finish();
+        }
+        // else user not sign in so stay on this activity
     }
 }
