@@ -21,5 +21,6 @@
     <string name="user_emergency_message">Hey im in danger and my location is: </string>
     <string name="post_emergency_messager_social_media">Post emergency message at social media</string>
     <string name="change_phone_number_title">Change phone number</string>
+    <string name="logout_btn_str">Sign out</string>
 
 </resources>
