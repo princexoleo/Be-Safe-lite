@@ -1,5 +1,6 @@
 package airobotics.asia;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -13,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -43,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         signinButton = findViewById(R.id.signin_btn);
         signupButton = findViewById(R.id.signup_btn);
         checkBox = findViewById(R.id.checkbox);
-        
+
         //initialize firebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
@@ -56,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Sign in Button Pressed!", Toast.LENGTH_SHORT).show();
                 Intent goNextIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(goNextIntent);
-                
+
             }
         });
 
@@ -70,6 +74,36 @@ public class LoginActivity extends AppCompatActivity {
                 //we are going to next activity so we need a intent
                 Intent goNextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(goNextIntent);
+
+                //collect user given email and password String from EditText
+                String given_email = emailEditText.getText().toString();
+                String given_password = emailEditText.getText().toString();
+
+                mAuth.signInWithEmailAndPassword(given_email, given_password)
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (task.isSuccessful()){
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail: success");
+                                    // updateUi
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+
+                                }else{
+                                    Log.d(TAG, "signInWithEmail: failed! ");
+                                    Toast.makeText(LoginActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
+                                }
+
+                            }
+                        });
+
+
+
+
+
 
 
             }
