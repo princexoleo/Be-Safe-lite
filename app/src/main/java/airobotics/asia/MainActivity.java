@@ -28,12 +28,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Recive Intent values
+       // String documentID =getIntent().getStringExtra("documentID");
+
         //initialize view with xml
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.view_pager);
 
         adapter = new TabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ProfileFragment(),"Profile");
+        // create Fragment Object
+        ProfileFragment profileFragment = new ProfileFragment();
+        // create a bundle to pass data
+       // Bundle bundle = new Bundle();
+      //  bundle.putString("bundleID",documentID);
+        //pass bundle
+        //profileFragment.setArguments(bundle);
+        //now pass the  ProfileFragments object
+        adapter.addFragment(profileFragment,"Profile");
         adapter.addFragment(new PrefsFragment(),"Settings");
 
         viewPager.setAdapter(adapter);

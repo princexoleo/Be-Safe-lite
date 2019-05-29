@@ -140,31 +140,20 @@ public class SignUpActivity extends AppCompatActivity {
             FirebaseFirestore database = FirebaseFirestore.getInstance();
 
             //add map information to database with generated ID
-            database.collection("users")
-                    .add(userInfoMap)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "userInfo added with ID : "+documentReference.getId());
 
+            database.collection("users").document(user.getUid())
+                    .set(userInfoMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "userInfo added with current Users UID : ");
                             //information added successfully
                             //now take users to next activity
                             Intent goNextActivity = new Intent(SignUpActivity.this,MainActivity.class);
-                            // we pass a documentID so in next activity we can easily set userInformation
-                            goNextActivity.putExtra("documentID",documentReference.getId());
                             startActivity(goNextActivity);
                             finish();
-
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding userInfo: ", e );
                         }
                     });
-
-
 
         }else{
             // acount created fail so make a snackBar to show message Try again

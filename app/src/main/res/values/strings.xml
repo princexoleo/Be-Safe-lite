@@ -23,4 +23,7 @@
     <string name="change_phone_number_title">Change phone number</string>
     <string name="logout_btn_str">Sign out</string>
 
+    <!-- Firebase Section  -->
+    <string name="collection_users">users</string>
+
 </resources>
