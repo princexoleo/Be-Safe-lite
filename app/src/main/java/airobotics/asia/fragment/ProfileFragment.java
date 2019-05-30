@@ -86,12 +86,9 @@ public class ProfileFragment extends Fragment {
                                    longitudeStr = task.getResult().get("lon").toString();
                                    updateUI();
                                }
-
                            }
-
                        }
                    });
-
        }else{
            Log.d(TAG, "onCreateView: currentUser: null");
            latitudeStr =null;
