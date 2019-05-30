@@ -200,8 +200,8 @@ public class LocationService extends Service {
                // User.setEmr_message(emr_messsage);
 
                 Map<String, Object> locationMap = new HashMap<>();
-                locationMap.put("latitude", String.valueOf(lat));
-                locationMap.put("longitude", String.valueOf(longi));
+                locationMap.put("lat", String.valueOf(lat));
+                locationMap.put("lon", String.valueOf(longi));
 //                locationMap.put("city", userCity);
 //                locationMap.put("locality", userLocality);
 //                locationMap.put("postal_code", userPostalCode);
