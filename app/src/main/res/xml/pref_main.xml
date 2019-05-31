@@ -6,6 +6,8 @@
     android:nestedScrollingEnabled="true"
     android:overScrollMode="ifContentScrolls"
     android:title="General"
+    android:recycleEnabled="true"
+
     >
 
 
@@ -97,8 +99,5 @@
             android:summary="This application developed by AiRobotics asia"
             android:title="About us" />
     </PreferenceCategory>
-
-
-
 
 </PreferenceScreen>

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new TabAdapter(getSupportFragmentManager());
         // create Fragment Object
-        ProfileFragment profileFragment = new ProfileFragment();
+        ProfileFragment profileFragment = new ProfileFragment(MainActivity.this);
         // create a bundle to pass data
        // Bundle bundle = new Bundle();
       //  bundle.putString("bundleID",documentID);
