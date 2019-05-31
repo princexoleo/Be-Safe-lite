@@ -7,4 +7,5 @@
     <dimen name="tablayout_margin_top">8dp</dimen>
     <dimen name="text_input_size_normal">14sp</dimen>
     <dimen name="profile_cardview_size">250dp</dimen>
+    <dimen name="current_location_imageView_layout_size">80dp</dimen>
 </resources>
