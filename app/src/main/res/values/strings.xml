@@ -14,16 +14,29 @@
     <string name="default_msg">Hey Im in danger</string>
 
 
-    <!-- User Info Section -->
+    <!-- User Info Section  Default-->
     <string name="user_name">User Name</string>
     <string name="user_phone_number">019********21</string>
     <string name="user_emergency_phone_number">018115****21</string>
     <string name="user_emergency_message">Hey im in danger and my location is: </string>
-    <string name="post_emergency_messager_social_media">Post emergency message at social media</string>
-    <string name="change_phone_number_title">Change phone number</string>
+
     <string name="logout_btn_str">Sign out</string>
+
+    <!-- User Preference Section  Default-->
+    <string name="change_phone_number_title">Change phone number</string>
+    <string name="location_switch_default_value">true</string>
+    <string name="bluetooth_switch_default_value">true</string>
+
+    <string name="user_name_pre">user_name_edit_text</string>
+    <string name="user_phone_pre">user_phone_number_edit_text</string>
+    <string name="user_emr_phone_pre">user_emergency_edit_text</string>
+    <string name="user_emr_msg_pre">user_emergency_msg_edit_text</string>
 
     <!-- Firebase Section  -->
     <string name="collection_users">users</string>
+    <string name="bluetooth_switch_value">bluetooth_switch</string>
+    <string name="location_switch_pre">location_switch</string>
+    <string name="bluetooth_switch_pre">Bluetooth Services</string>
+
 
 </resources>

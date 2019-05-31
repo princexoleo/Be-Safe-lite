@@ -18,7 +18,7 @@
             android:dialogIcon="@drawable/ic_perm_identity_black_24dp"
             android:icon="@drawable/ic_person_black_24dp"
             android:inputType="textMultiLine"
-            android:key="user_name_edit_text"
+            android:key="@string/user_name_pre"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Change profile name"/>
@@ -28,7 +28,7 @@
             android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
             android:icon="@drawable/ic_phonelink_ring_black_24dp"
             android:inputType="phone"
-            android:key="user_phone_number_edit_text"
+            android:key="@string/user_phone_pre"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="Click here and enter your new valid phone number"
@@ -40,7 +40,7 @@
             android:dialogIcon="@drawable/ic_phonelink_ring_black_24dp"
             android:icon="@drawable/ic_phonelink_ring_black_24dp"
             android:inputType="phone"
-            android:key="user_emergency_edit_text"
+            android:key="@string/user_emr_phone_pre"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="Click here and enter your new valid phone number"
@@ -51,7 +51,7 @@
             android:dialogIcon="@drawable/ic_mail_outline_black_24dp"
             android:icon="@drawable/ic_message_black_24dp"
             android:inputType="textMultiLine"
-            android:key="user_emergency_msg_edit_text"
+            android:key="@string/user_emr_msg_pre"
             android:selectAllOnFocus="true"
             android:summary="@string/emergency_settings_hint"
             android:title="Custom emergency message" />
@@ -65,18 +65,18 @@
 
         <SwitchPreference
             android:id="@+id/location_service_id"
-            android:defaultValue="true"
+            android:defaultValue="@string/location_switch_default_value"
             android:icon="@drawable/ic_gps_fixed_black_24dp"
-            android:key="location_switch"
+            android:key="@string/location_switch_pre"
             android:title="Location Services "
             android:summary="Turn this option on or off"
             tools:text="if enable it will help you to detect your current location" />
 
         <SwitchPreference
             android:id="@+id/bluethoot_service_id"
-            android:defaultValue="true"
+            android:defaultValue="@string/bluetooth_switch_default_value"
             android:icon="@drawable/ic_bluetooth_connected_black_24dp"
-            android:key="bluetooth_switch"
+            android:key="@string/bluetooth_switch_pre"
             android:title="Bluetooth connection "
             android:summary="Turn this option on or off"
             tools:text="if enable it will it help you to connect your device" />
