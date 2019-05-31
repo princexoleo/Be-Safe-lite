@@ -1,10 +1,17 @@
 package airobotics.asia.fragment;
 
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -22,10 +29,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
+
+import java.util.ArrayList;
+
+import javax.annotation.Nullable;
 
 import airobotics.asia.LoginActivity;
 import airobotics.asia.R;
+import airobotics.asia.model.LocationService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +64,15 @@ public class ProfileFragment extends Fragment {
     private DocumentReference documentReference;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    
+    //
+    private BroadcastReceiver broadcastReceiver;
+    private  Context mContext;
+     boolean check =false;
 
+    public ProfileFragment(Context mContext) {
+        this.mContext = mContext;
+    }
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -59,6 +84,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_profile, container, false);
+       // mContext = container.getContext();
         Log.d(TAG, "onCreateView: profile fragment created ");
 
         initComponents(view);
@@ -68,9 +94,24 @@ public class ProfileFragment extends Fragment {
         mAuth =FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
+
+
+
+        //start tracking location
+        if (!runtime_permission()){
+         // enable_button();
+          enable_tracking_location();
+        }
+        else{
+
+
+        }
+        //
+
         //read data from FirebaseFireStore
         //first we need a DocumentReference
        if(currentUser != null){
+
            Log.i(TAG, "onCreateView: currentUser :"+currentUser.getUid());
            documentReference = database.collection("users").document(currentUser.getUid());
            documentReference.get()
@@ -85,11 +126,15 @@ public class ProfileFragment extends Fragment {
                                    latitudeStr= task.getResult().get("lat").toString();
                                    longitudeStr = task.getResult().get("lon").toString();
                                    updateUI();
+                                 //  updateLocationUI(latitudeStr,longitudeStr);
                                }
                            }
                        }
                    });
-       }else{
+
+           addRealTimeUpdates();
+       }
+       else{
            Log.d(TAG, "onCreateView: currentUser: null");
            latitudeStr =null;
            longitudeStr = null;
@@ -112,6 +157,42 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    private void enable_tracking_location() {
+          Log.d(TAG, "enable_tracking_location: ");
+        Intent i=new Intent(mContext,LocationService.class);
+        mContext.startService(i);
+        Toast.makeText(mContext, "Start Tracking Location ..", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    private void addRealTimeUpdates(){
+        DocumentReference docRef = database.collection("users").document(currentUser.getUid());
+
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e!=null){
+                    Log.d(TAG, "onEvent: ERROR "+e.getMessage());
+                }
+                if (documentSnapshot !=null && documentSnapshot.exists()){
+                    Log.d(TAG, "onEvent: Current data "+documentSnapshot.getData());
+                    latitudeStr = documentSnapshot.get("lat").toString();
+                    longitudeStr = documentSnapshot.get("lon").toString();
+                    updateLocationUI(latitudeStr,longitudeStr);
+                }
+            }
+        });
+    }
+
+    private void updateLocationUI(String latitudeStr, String longitudeStr) {
+
+        latValueTextView.setText(latitudeStr);
+        longValueTextView.setText(longitudeStr);
+        Log.d(TAG, "updateLocationUI: location textview updated");
+    }
+
+
     private void initComponents(View view) {
 
         imageView = view.findViewById(R.id.imageView);
@@ -121,6 +202,7 @@ public class ProfileFragment extends Fragment {
         latValueTextView = view.findViewById(R.id.lat_textView_id);
         longValueTextView = view.findViewById(R.id.longi_textView_id);
         signOutButton = view.findViewById(R.id.sign_out_btn);
+
     }
 
     private void updateUI() {
@@ -136,6 +218,33 @@ public class ProfileFragment extends Fragment {
             Log.d(TAG, "updateUI: null");
             latValueTextView.setText("null");
             longValueTextView.setText("null");
+        }
+    }
+    
+    
+    //runtimne permission check
+    private boolean runtime_permission() {
+        if (Build.VERSION.SDK_INT >=23 && ContextCompat.checkSelfPermission(mContext,Manifest.permission.ACCESS_FINE_LOCATION) !=PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(mContext,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+            return  true;
+        }
+        return false;
+
+    }
+    
+    //
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==100){
+
+            if (grantResults[0]==PackageManager.PERMISSION_GRANTED &&
+                    grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                enable_tracking_location();
+            }else{
+                runtime_permission();
+            }
         }
     }
 
@@ -155,4 +264,39 @@ public class ProfileFragment extends Fragment {
             Log.d(TAG, "onStart: currentUser check "+currentUser.getUid());
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: called");
+        if (broadcastReceiver==null)
+        {
+            broadcastReceiver =new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+
+                    longitudeStr= String.valueOf( intent.getExtras().get("longitude"));
+                    latitudeStr=String.valueOf( intent.getExtras().get("latitude"));
+                    //set new location to textView
+                   updateLocationUI(latitudeStr,longitudeStr);
+                    
+                    Log.i(TAG, "onReceive: broad "+longitudeStr+"  "+latitudeStr);
+
+                    //updateUserLocation(userLatitude,userLongitude);
+                }
+            };
+        }
+        getContext().registerReceiver(broadcastReceiver,new IntentFilter("location_updated"));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (broadcastReceiver!=null){
+            getContext().unregisterReceiver(broadcastReceiver);
+        }
+    }
+    
+    
 }

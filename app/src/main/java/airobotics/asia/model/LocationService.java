@@ -12,12 +12,15 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,9 +37,7 @@ import airobotics.asia.R;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-/**
- * Created by 5943 6417 on 14-09-2016.
- */
+
 public class LocationService extends Service {
     private static final String TAG = "LocationService";
     public static final String BROADCAST_ACTION = "Hello World";
@@ -59,6 +60,22 @@ public class LocationService extends Service {
         context = this;
         mAuth= FirebaseAuth.getInstance();
         firebaseFirestore= FirebaseFirestore.getInstance();
+        Log.d(TAG, "onCreate:LocationService called ");
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        listener = new MyLocationListener();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 0, listener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, listener);
     }
 
     @Override
@@ -184,8 +201,8 @@ public class LocationService extends Service {
                 loc.getLongitude();
                 Log.d(TAG, "onLocationChanged: "+loc.getLongitude()+" lati"+loc.getLatitude()+" provi"+loc.getProvider());
                 //Toast.makeText(context, "Latitude" + loc.getLatitude() + "\nLongitude"+loc.getLongitude(),Toast.LENGTH_SHORT).show();
-                intent.putExtra("Latitude", loc.getLatitude());
-                intent.putExtra("Longitude", loc.getLongitude());
+                intent.putExtra("latitude", loc.getLatitude());
+                intent.putExtra("longitude", loc.getLongitude());
                 intent.putExtra("Provider", loc.getProvider());
                 sendBroadcast(intent);
 
@@ -202,18 +219,26 @@ public class LocationService extends Service {
                 Map<String, Object> locationMap = new HashMap<>();
                 locationMap.put("lat", String.valueOf(lat));
                 locationMap.put("lon", String.valueOf(longi));
+                locationMap.put("emr_message", emr_messsage);
 //                locationMap.put("city", userCity);
 //                locationMap.put("locality", userLocality);
 //                locationMap.put("postal_code", userPostalCode);
 //                locationMap.put("country_name", userCountryName);
 //                locationMap.put("country_code", userCountryCode);
-                locationMap.put("emr_message",emr_messsage);
-                firebaseFirestore.collection("users").document(currentUser).update(locationMap)
+
+                firebaseFirestore.collection("users").document(currentUser)
+                        .update(locationMap)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                               //  AccountFragment.updateUserLocation(String.valueOf(lat), String.valueOf(longi));
                                 Log.d(TAG, "locationUpdated: success");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "locationUpdated: failed!");
                             }
                         });
 
