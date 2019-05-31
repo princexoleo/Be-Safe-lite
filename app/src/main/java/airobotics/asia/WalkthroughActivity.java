@@ -19,7 +19,7 @@ public class WalkthroughActivity extends AppCompatActivity {
 
     Button nextBtn,skipBtn;
 
-    private String [] permission ={Manifest.permission.SEND_SMS,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
+    private String [] permission ={Manifest.permission.SEND_SMS,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
     String rationale = "Please provide location permission so that you can access";
 
 
@@ -51,8 +51,6 @@ public class WalkthroughActivity extends AppCompatActivity {
 
             }
         });
-
-
 
     }
 }
