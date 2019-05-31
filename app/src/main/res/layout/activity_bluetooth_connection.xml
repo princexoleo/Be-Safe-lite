@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".BluetoothConnection">
+    tools:context=".BluetoothConnection"
+    android:padding="4dp">
 
     <Button
         android:id="@+id/send_msg_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="send msg" />
+        android:background="@drawable/button_background"
+        android:text="send msg"
+        android:textColor="@color/textColor"/>
 
 
     <LinearLayout
@@ -92,8 +94,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:backgroundTint="@color/textColor"
+            android:textColor="@color/textColor"
             android:elevation="10dp"
+            android:background="@drawable/background"
             android:text="Bluetooth ON" />
 
         <Button
