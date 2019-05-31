@@ -23,7 +23,11 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 
 import java.io.IOException;
@@ -32,6 +36,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
+import javax.annotation.Nullable;
 
 import airobotics.asia.R;
 
@@ -49,6 +55,9 @@ public class LocationService extends Service {
     private FirebaseFirestore firebaseFirestore;
 
     Context context;
+
+    //
+    String user_emr_msg="Hey i'm in danger situation and my location is : ";
 
     Intent intent;
     int counter = 0;
@@ -205,21 +214,23 @@ public class LocationService extends Service {
                 intent.putExtra("longitude", loc.getLongitude());
                 intent.putExtra("Provider", loc.getProvider());
                 sendBroadcast(intent);
-
-
                 final Double lat = loc.getLatitude();
                 final Double longi = loc.getLongitude();
-               // userLocality = getCityName(loc);
-             //   AccountFragment.setUserCityNameTv(userLocality);
 
-                String emr_messsage="https://www.google.com/maps/search/?api=1&amp;query="+lat+","+longi;
+                //firebase firesStore get Uuser emer_msg
+                addRealTimeUpdates();
+                String emrgency_msg = user_emr_msg+" https://www.google.com/maps/search/?api=1&amp;query="+lat+","+longi;
+
+              // user_emr_msg.concat(emr_messsage);
                // user_emergency_message = emr_messsage;
                // User.setEmr_message(emr_messsage);
 
                 Map<String, Object> locationMap = new HashMap<>();
                 locationMap.put("lat", String.valueOf(lat));
                 locationMap.put("lon", String.valueOf(longi));
-                locationMap.put("emr_message", emr_messsage);
+                locationMap.put("emr_message", emrgency_msg);
+
+                Log.d(TAG, "onLocationChanged: emr_messsge "+emrgency_msg);
 //                locationMap.put("city", userCity);
 //                locationMap.put("locality", userLocality);
 //                locationMap.put("postal_code", userPostalCode);
@@ -298,5 +309,18 @@ public class LocationService extends Service {
 //            return myCity;
 //        }
 
+    }
+
+    private void addRealTimeUpdates(){
+
+        DocumentReference docRef = firebaseFirestore.collection("users").document(mAuth.getCurrentUser().getUid());
+
+       docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+           @Override
+           public void onSuccess(DocumentSnapshot documentSnapshot) {
+            user_emr_msg= documentSnapshot.get("emr_msg").toString();
+               Log.d(TAG, "emr_msg_received: "+user_emr_msg);
+           }
+       });
     }
 }

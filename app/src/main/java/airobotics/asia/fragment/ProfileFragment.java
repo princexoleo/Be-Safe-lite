@@ -201,9 +201,9 @@ public class ProfileFragment extends Fragment {
 
     private  void enable_tracking_location() {
           Log.d(TAG, "enable_tracking_location: start ");
-        Intent i=new Intent(mContext,LocationService.class);
-        mContext.startService(i);
-        Toast.makeText(mContext, "Start Tracking Location ..", Toast.LENGTH_SHORT).show();
+          Intent i=new Intent(mContext,LocationService.class);
+           mContext.startService(i);
+          Toast.makeText(mContext, "Start Tracking Location ..", Toast.LENGTH_SHORT).show();
     }
 
 
