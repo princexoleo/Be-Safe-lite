@@ -318,8 +318,13 @@ public class LocationService extends Service {
        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
            @Override
            public void onSuccess(DocumentSnapshot documentSnapshot) {
-            user_emr_msg= documentSnapshot.get("emr_msg").toString();
-               Log.d(TAG, "emr_msg_received: "+user_emr_msg);
+            try{
+                user_emr_msg= documentSnapshot.get("emr_msg").toString();
+                Log.d(TAG, "emr_msg_received: "+user_emr_msg);
+            }catch (NullPointerException e){
+                user_emr_msg ="Hey i'm in danger situation and my location is : ";
+                Log.d(TAG, "exception found: "+e.getMessage());
+            }
            }
        });
     }
