@@ -50,6 +50,8 @@ import airobotics.asia.model.LocationService;
  */
 public class ProfileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
+    private String [] permission ={Manifest.permission.SEND_SMS,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
+    String rationale = "Please provide location permission so that you can access";
 
     private ImageView imageView;
     private TextView titleTextView, latTitleTextView, longTitleTextView, latValueTextView, longValueTextView;
@@ -99,20 +101,13 @@ public class ProfileFragment extends Fragment {
 
 
 
-
-        //start tracking location
-        if (!runtime_permission()){
          // enable_button();
                if (locationSwitchValue.equals("true")){
                    enable_tracking_location();
                }else{
                    stopTrackingLocation();
                }
-        }
-        else{
-            Log.d(TAG, "onCreateView: permission not allowed yet");
 
-        }
         //
         enable_bluetooth_services();
         //
@@ -271,15 +266,15 @@ public class ProfileFragment extends Fragment {
     
     
     //runtimne permission check
-    private boolean runtime_permission() {
-        if (Build.VERSION.SDK_INT >=23 && ContextCompat.checkSelfPermission(mContext,Manifest.permission.ACCESS_FINE_LOCATION) !=PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(mContext,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-            return  true;
-        }
-        return false;
-
-    }
+//    private boolean runtime_permission() {
+//        if (Build.VERSION.SDK_INT >=25 && ContextCompat.checkSelfPermission(mContext,Manifest.permission.ACCESS_FINE_LOCATION) !=PackageManager.PERMISSION_GRANTED &&
+//                ContextCompat.checkSelfPermission(mContext,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+//            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+//            return  false;
+//        }
+//        return true;
+//
+//    }
     
     //
     @Override
@@ -291,7 +286,7 @@ public class ProfileFragment extends Fragment {
                     grantResults[1]==PackageManager.PERMISSION_GRANTED){
                 enable_tracking_location();
             }else{
-                runtime_permission();
+                //runtime_permission();
             }
         }
     }

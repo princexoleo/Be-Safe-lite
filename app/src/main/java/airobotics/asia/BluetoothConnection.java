@@ -244,14 +244,15 @@ public class BluetoothConnection extends AppCompatActivity {
     private void SendToEmergencyMessage(String readMessage) {
         Log.d(TAG, "SendToEmergencyMessage: ");
 
-        //send message
+      //  send message
         if (ContextCompat.checkSelfPermission(BluetoothConnection.this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(BluetoothConnection.this,new String[]{Manifest.permission.SEND_SMS},
                     MY_PERMISSION_REQUEST_SEND_SMS);
         }
-        else if(readMessage==null)
+        else
+            if(readMessage==null)
         {
             //nothing found from Hardware ...
             Toast.makeText(this, "Wrong data found", Toast.LENGTH_SHORT).show();
