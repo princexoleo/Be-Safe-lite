@@ -40,6 +40,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
+import airobotics.asia.BluetoothConnection;
 import airobotics.asia.LoginActivity;
 import airobotics.asia.R;
 import airobotics.asia.model.LocationService;
@@ -52,7 +53,7 @@ public class ProfileFragment extends Fragment {
 
     private ImageView imageView;
     private TextView titleTextView, latTitleTextView, longTitleTextView, latValueTextView, longValueTextView;
-    private Button signOutButton;
+    private Button signOutButton, connectButton;
 
     //
     private String longitudeStr =null;
@@ -107,16 +108,13 @@ public class ProfileFragment extends Fragment {
                }else{
                    stopTrackingLocation();
                }
-               if (bluetoothSwitchValue.equals("true")){
-                   enable_bluetooth_services();
-               }else{
-                   stop_bluetooth_services();
-               }
         }
         else{
             Log.d(TAG, "onCreateView: permission not allowed yet");
 
         }
+        //
+        enable_bluetooth_services();
         //
 
         //read data from FirebaseFireStore
@@ -172,6 +170,13 @@ public class ProfileFragment extends Fragment {
     
     private void enable_bluetooth_services(){
         Log.d(TAG, "enable_bluetooth_services: Start");
+        connectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goConnect = new Intent(mContext, BluetoothConnection.class);
+                startActivity(goConnect);
+            }
+        });
         
     }
     
@@ -244,6 +249,7 @@ public class ProfileFragment extends Fragment {
         latValueTextView = view.findViewById(R.id.lat_textView_id);
         longValueTextView = view.findViewById(R.id.longi_textView_id);
         signOutButton = view.findViewById(R.id.sign_out_btn);
+        connectButton = view.findViewById(R.id.connect_button);
 
     }
 

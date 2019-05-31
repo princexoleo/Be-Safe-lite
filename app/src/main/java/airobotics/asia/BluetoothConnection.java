@@ -104,8 +104,6 @@ public class BluetoothConnection extends AppCompatActivity {
     private String sendPhoneNumber;
     private String emrMessage;
 
-    String emr_msg_toSend="";
-    String emr_phone_toSend="";
 
     Button sendbtn;
 
@@ -120,15 +118,16 @@ public class BluetoothConnection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_connection);
 
+        //initialize sendButton;
         sendbtn=findViewById(R.id.send_msg_btn);
 
+        //initialize firebaseFirestore database
         firebaseFirestore = FirebaseFirestore.getInstance();
         mAuth =FirebaseAuth.getInstance();
 
 
 
         //isMessageSent=false;
-
         mBluetoothStatus = findViewById(R.id.bluetoothStatus);
         mReadBuffer =  findViewById(R.id.readBuffer);
         mScanBtn = findViewById(R.id.scan);
@@ -146,7 +145,8 @@ public class BluetoothConnection extends AppCompatActivity {
 
         sendPendingIntent= PendingIntent.getBroadcast(BluetoothConnection.this,0,new Intent(SENT),0);
         deliveredPendingIntent=PendingIntent.getBroadcast(BluetoothConnection.this,0,new Intent(DELIVERED),0);
-        //userInfo
+
+        //userInfo collect from database
         getRealTimeData();
         updateUi("nothing receive yet");
 
@@ -233,6 +233,7 @@ public class BluetoothConnection extends AppCompatActivity {
             sendbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d(TAG, "onClick: Send Button Clicked");
                     SendToEmergencyMessage("HELP");
                     updateUi("ready to send message.. Again press..");
                 }

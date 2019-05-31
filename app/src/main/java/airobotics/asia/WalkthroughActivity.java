@@ -50,19 +50,6 @@ public class WalkthroughActivity extends AppCompatActivity {
                 });
 
             }
-
-            @Override
-            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                super.onDenied(context, deniedPermissions);
-                nextBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent goLogin=new Intent(WalkthroughActivity.this,LoginActivity.class);
-                        startActivity(goLogin);
-                        finish();
-                    }
-                });
-            }
         });
 
 
