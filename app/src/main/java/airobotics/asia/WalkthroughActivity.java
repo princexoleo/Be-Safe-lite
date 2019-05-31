@@ -1,6 +1,7 @@
 package airobotics.asia;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+
+import java.util.ArrayList;
 
 public class WalkthroughActivity extends AppCompatActivity {
 
@@ -47,7 +50,21 @@ public class WalkthroughActivity extends AppCompatActivity {
                 });
 
             }
+
+            @Override
+            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                super.onDenied(context, deniedPermissions);
+                nextBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent goLogin=new Intent(WalkthroughActivity.this,LoginActivity.class);
+                        startActivity(goLogin);
+                        finish();
+                    }
+                });
+            }
         });
+
 
 
     }
