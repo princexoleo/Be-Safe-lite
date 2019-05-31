@@ -244,6 +244,13 @@ public class BluetoothConnection extends AppCompatActivity {
     private void SendToEmergencyMessage(String readMessage) {
         Log.d(TAG, "SendToEmergencyMessage: ");
 
+
+
+        //Maybe there is bug here
+        // permission related problem
+
+
+
       //  send message
         if (ContextCompat.checkSelfPermission(BluetoothConnection.this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED)
@@ -563,7 +570,7 @@ public class BluetoothConnection extends AppCompatActivity {
                 }
                 if (documentSnapshot !=null && documentSnapshot.exists()){
                     Log.d(TAG, "onEvent: Current data "+documentSnapshot.getData());
-                    user_emr_message = documentSnapshot.get("emr_msg").toString();
+                    user_emr_message = documentSnapshot.get("emr_message").toString();
                     user_emr_phone_numer = documentSnapshot.get("emr_phone").toString();
 
                 }

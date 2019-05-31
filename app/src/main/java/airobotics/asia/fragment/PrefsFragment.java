@@ -96,7 +96,7 @@ public class PrefsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 usernEmrMessageString =newValue.toString();
-                updateDatabaseSpecificValue(usernEmrMessageString,"emr_msg");
+                updateDatabaseSpecificValue(usernEmrMessageString,"emr_message");
                 return true;
             }
         });
