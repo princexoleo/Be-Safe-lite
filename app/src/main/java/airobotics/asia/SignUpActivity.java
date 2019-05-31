@@ -97,6 +97,8 @@ public class SignUpActivity extends AppCompatActivity {
                     //new users information store in Map
                     userInfoMap.put("name",reg_name);
                     userInfoMap.put("emr_phone",reg_emergency_phone_number);
+                    userInfoMap.put("location_switch","true");
+                    userInfoMap.put("bluetooth_switch","true");
                     //
                     createAccount(reg_email,reg_password);
 

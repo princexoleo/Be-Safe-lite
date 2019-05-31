@@ -105,6 +105,11 @@ public class PrefsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 String newVa =String.valueOf(newValue);
+                if (newVa.equals("true"))
+                {
+                    ProfileFragment.changeSwitchValue(newVa,"location");
+
+                }
                 updateDatabaseSpecificValue(newVa,"location_switch");
                 return true;
             }
@@ -113,6 +118,11 @@ public class PrefsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 String newVa =String.valueOf(newValue);
+                if (newVa.equals("true"))
+                {
+                    ProfileFragment.changeSwitchValue(newVa,"bluetooth");
+
+                }
                 updateDatabaseSpecificValue(newVa,"bluetooth_switch");
                 return true;
             }

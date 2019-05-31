@@ -58,6 +58,8 @@ public class ProfileFragment extends Fragment {
     private String longitudeStr =null;
     private String latitudeStr =null;
     private String userEmergencyPhoneNumber =null;
+    private static String locationSwitchValue="true";
+    private  static String bluetoothSwitchValue="true";
 
     //Firebase
     private FirebaseFirestore database;
@@ -100,10 +102,19 @@ public class ProfileFragment extends Fragment {
         //start tracking location
         if (!runtime_permission()){
          // enable_button();
-          enable_tracking_location();
+               if (locationSwitchValue.equals("true")){
+                   enable_tracking_location();
+               }else{
+                   stopTrackingLocation();
+               }
+               if (bluetoothSwitchValue.equals("true")){
+                   enable_bluetooth_services();
+               }else{
+                   stop_bluetooth_services();
+               }
         }
         else{
-
+            Log.d(TAG, "onCreateView: permission not allowed yet");
 
         }
         //
@@ -125,6 +136,8 @@ public class ProfileFragment extends Fragment {
                                if (task.getResult().exists()){
                                    latitudeStr= task.getResult().get("lat").toString();
                                    longitudeStr = task.getResult().get("lon").toString();
+                                   locationSwitchValue = task.getResult().get("location_switch").toString();
+                                   bluetoothSwitchValue = task.getResult().get("bluetooth_switch").toString();
                                    updateUI();
                                  //  updateLocationUI(latitudeStr,longitudeStr);
                                }
@@ -156,9 +169,38 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
+    
+    private void enable_bluetooth_services(){
+        Log.d(TAG, "enable_bluetooth_services: Start");
+        
+    }
+    
+    private void stop_bluetooth_services(){
+        Log.d(TAG, "stop_bluetooth_services: Stop");
+        
+    }
 
-    private void enable_tracking_location() {
-          Log.d(TAG, "enable_tracking_location: ");
+    public static void changeSwitchValue(String value, String name){
+
+        if (name.equals("location")){
+            locationSwitchValue=value;
+        }else{
+            bluetoothSwitchValue=value;
+        }
+
+    }
+
+    private  void stopTrackingLocation() {
+
+        Log.d(TAG, "enable_tracking_location: stop ");
+        Intent i=new Intent(mContext,LocationService.class);
+        mContext.stopService(i);
+        Toast.makeText(mContext, "Stop Tracking Location ..", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private  void enable_tracking_location() {
+          Log.d(TAG, "enable_tracking_location: start ");
         Intent i=new Intent(mContext,LocationService.class);
         mContext.startService(i);
         Toast.makeText(mContext, "Start Tracking Location ..", Toast.LENGTH_SHORT).show();
