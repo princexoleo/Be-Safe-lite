@@ -33,14 +33,13 @@ import airobotics.asia.R;
 public class PrefsFragment extends PreferenceFragmentCompat {
 
     private static final String TAG = "PrefsFragment";
-
-    SharedPreferences preferences;
-    String userNameStr;
-    String userPhoneString;
-    String usernEmrPhoneString;
-    String usernEmrMessageString;
+    private SharedPreferences preferences;
+    private String userNameStr;
+    private String userPhoneString;
+    private String usernEmrPhoneString;
+    private  String usernEmrMessageString;
     boolean locationServices, bluetoothServices;
-    Map<String,Object>preferenceMap= new HashMap<>();
+    private Map<String,Object>preferenceMap= new HashMap<>();
 
     //Firebase
     FirebaseAuth mAuth;
