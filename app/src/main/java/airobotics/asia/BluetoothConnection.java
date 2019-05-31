@@ -167,7 +167,7 @@ public class BluetoothConnection extends AppCompatActivity {
 
 
                     updateUi(readMessage);
-                    Log.d(TAG, "onCreate: prepare to sendind Message");
+                    Log.d(TAG, "onCreate: preparing to sendind Message");
                     //isMessageSent=true;
                     // Toast.makeText(BluetoothConnection.this, "Msg Sending is processing...", Toast.LENGTH_SHORT).show();
 
@@ -184,31 +184,6 @@ public class BluetoothConnection extends AppCompatActivity {
             }
         };
         // SendToEmergencyMessage(readMessage);
-        String currentUser_id=mAuth.getCurrentUser().getUid();
-        firebaseFirestore.collection("Users").document(currentUser_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                if (task.isSuccessful())
-                {
-                    emr_msg_toSend=task.getResult().getString("emr_message");
-                    emr_phone_toSend=task.getResult().getString("emergency_phone");
-
-                    if (emr_msg_toSend==null)
-                    {
-                        emr_msg_toSend="I'm in Danger!!! please help me!!";
-                    }
-                    Log.i(TAG, "onCompleteImagePro: phn: "+emr_phone_toSend+" msg: "+emr_msg_toSend);
-
-                }else{
-                    Toast.makeText(BluetoothConnection.this, "firestore retrieve error!!", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-
-
 
 
         if (mBTArrayAdapter == null) {
@@ -283,12 +258,11 @@ public class BluetoothConnection extends AppCompatActivity {
         else{
 
 
-            Log.d(TAG, "SendToEmergencyMessage: msg:  "+emr_msg_toSend+" To "+emr_phone_toSend);
-            Log.d(TAG, "SendToEmergencyMessage: UserClass phn "+sendPhoneNumber+" msg:"+emrMessage);
+            Log.d(TAG, "SendToEmergencyMessage: msg:  "+user_emr_phone_numer+" To "+user_emr_phone_numer);
             //  Log.d(TAG, "SendToEmergencyMessage:phonenumber :"+sendingPhoneNumber);
             //permission granted
             SmsManager sms= SmsManager.getDefault();
-            sms.sendTextMessage(emr_phone_toSend,null,emr_msg_toSend,sendPendingIntent,deliveredPendingIntent);
+            sms.sendTextMessage(user_emr_phone_numer,null,user_emr_message,sendPendingIntent,deliveredPendingIntent);
 
         }
 
