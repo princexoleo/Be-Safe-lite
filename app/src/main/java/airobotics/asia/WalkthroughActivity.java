@@ -11,8 +11,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 

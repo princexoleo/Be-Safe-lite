@@ -99,6 +99,8 @@ public class SignUpActivity extends AppCompatActivity {
                     userInfoMap.put("emr_phone",reg_emergency_phone_number);
                     userInfoMap.put("location_switch","true");
                     userInfoMap.put("bluetooth_switch","true");
+                    userInfoMap.put("lat","90.00");
+                    userInfoMap.put("lon","89.25");
                     //
                     createAccount(reg_email,reg_password);
 
