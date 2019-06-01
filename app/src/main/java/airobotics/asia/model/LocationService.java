@@ -313,19 +313,21 @@ public class LocationService extends Service {
 
     private void addRealTimeUpdates(){
 
-        DocumentReference docRef = firebaseFirestore.collection("users").document(mAuth.getCurrentUser().getUid());
+      if (mAuth.getCurrentUser().getUid() !=null){
+          DocumentReference docRef = firebaseFirestore.collection("users").document(mAuth.getCurrentUser().getUid());
 
-       docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-           @Override
-           public void onSuccess(DocumentSnapshot documentSnapshot) {
-            try{
-                user_emr_msg= documentSnapshot.get("emr_msg").toString();
-                Log.d(TAG, "emr_msg_received: "+user_emr_msg);
-            }catch (NullPointerException e){
-                user_emr_msg ="Hey i'm in danger situation and my location is : ";
-                Log.d(TAG, "exception found: "+e.getMessage());
-            }
-           }
-       });
+          docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+              @Override
+              public void onSuccess(DocumentSnapshot documentSnapshot) {
+                  try{
+                      user_emr_msg= documentSnapshot.get("emr_msg").toString();
+                      Log.d(TAG, "emr_msg_received: "+user_emr_msg);
+                  }catch (NullPointerException e){
+                      user_emr_msg ="Hey i'm in danger situation and my location is : ";
+                      Log.d(TAG, "exception found: "+e.getMessage());
+                  }
+              }
+          });
+      }
     }
 }
