@@ -560,21 +560,26 @@ public class BluetoothConnection extends AppCompatActivity {
 
 
     private void getRealTimeData(){
-        DocumentReference docRef = firebaseFirestore.collection("users").document(mAuth.getCurrentUser().getUid());
+        try {
+            DocumentReference docRef = firebaseFirestore.collection("users").document(mAuth.getCurrentUser().getUid());
 
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if (e!=null){
-                    Log.d(TAG, "onEvent: ERROR "+e.getMessage());
-                }
-                if (documentSnapshot !=null && documentSnapshot.exists()){
-                    Log.d(TAG, "onEvent: Current data "+documentSnapshot.getData());
-                    user_emr_message = documentSnapshot.get("emr_message").toString();
-                    user_emr_phone_numer = documentSnapshot.get("emr_phone").toString();
+            docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    if (e!=null){
+                        Log.d(TAG, "onEvent: ERROR "+e.getMessage());
+                    }
+                    if (documentSnapshot !=null && documentSnapshot.exists()){
+                        Log.d(TAG, "onEvent: Current data "+documentSnapshot.getData());
+                        user_emr_message = documentSnapshot.get("emr_message").toString();
+                        user_emr_phone_numer = documentSnapshot.get("emr_phone").toString();
 
+                    }
                 }
-            }
-        });
+            });
+            
+        }catch (NullPointerException e){
+            Log.d(TAG, "getRealTimeData: null pointer found");
+        }
     }
 }
