@@ -142,9 +142,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
                 android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
                 <TextView

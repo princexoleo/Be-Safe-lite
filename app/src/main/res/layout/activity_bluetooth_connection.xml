@@ -28,7 +28,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Socked !!"
+            android:text="Feedback"
             android:id="@+id/checkboxLED1"
             android:layout_marginTop="10dp"
             android:checked="false"
@@ -50,7 +50,8 @@
                 android:text="RX:"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:padding="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,13 +61,15 @@
                 android:text="Read Buffer"
                 android:id="@+id/readBuffer"
                 android:textSize="18sp"
+                android:padding="10dp"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="15dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,6 +94,7 @@
 
         <Button
             android:id="@+id/scan"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
